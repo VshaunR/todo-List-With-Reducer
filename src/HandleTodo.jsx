@@ -33,8 +33,14 @@ export default function HandleTodo({todos,dispatch}){
     function handleDelete(id){
         todos.map((todo)=>{
           if(todo.id ===id){
+            if(todo.completed ==false){
+              // document.getElementById('del').style.zIndex='0'
+        
+            }else if(todo.completed ==true){
+              // document.getElementById('del').toggle('.active')
             dispatch({type:'delete',payload:{id:todo.id}})
           }
+        }
         })
           // const del = [...todos].filter((todo)=>todo.id !==id);
           // setTodos(del)
@@ -81,10 +87,10 @@ export default function HandleTodo({todos,dispatch}){
   {todos.map((todo)=>{
     return (
     <div key={todo.id}>
-        {edit ===todo.id ? (<input type="text"  value={editText} onChange={handleEditText}/>):(  <p>{todo.todo}</p>)}
+        {edit ===todo.id ? (<input type="text"  value={todo.todo} onChange={handleEditText}/>):(  <p>{todo.todo}</p>)}
     
       
-      <button onClick={()=>handleDelete(todo.id)}>Delete</button>
+      <button id="del" onClick={()=>handleDelete(todo.id)} style={{opacity:todo.completed?('1'):('.5')}}>Delete</button>
       <input type="checkbox" value={todo.completed} id="completed" onChange={()=>handleCheck(todo.id)}/>
 
       {edit == todo.id 

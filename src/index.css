@@ -66,3 +66,10 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+#del{
+  opacity: .5;
+  z-index: 0;
+}
+.active{
+  opacity: 1;
+}
