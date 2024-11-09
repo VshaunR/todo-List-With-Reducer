@@ -1,22 +1,34 @@
-import { useState } from 'react'
+import { useState,useReducer } from 'react'
 import HandleTodo from './HandleTodo'
 import './App.css'
 
-function App() {
-  const [todos,setTodos] = useState([])
-  const [item,setItem] = useState("")
+function reducer(todos,action){
 
+  switch(action.type){
+    case'add':
+    return   [...todos,add(action.payload.item)]
+    case 'delete':
+      return   [...todos].filter((todo)=>todo.id !==action.payload.id);
+  }
+}
+function add(item){
+  return  {
+    id: new Date().getTime(),
+    todo:item,
+    completed:false
+  }
+}
+
+function App() {
+  // const [todos,setTodos] = useState([])
+  const [item,setItem] = useState("")
+  const [todos,dispatch]= useReducer(reducer,[])
   function handleChange(e){
-    setItem(e.target.value)
+   setItem(e.target.value)
   }
   function handleSubmit(e){
     e.preventDefault();
-    let newTodo = {
-      id: new Date().getTime(),
-      todo:item,
-      completed:false
-    }
-    setTodos([...todos,newTodo])
+    dispatch({type:'add',payload:{item:item}})
     setItem("")
   }
 
@@ -27,7 +39,7 @@ function App() {
           <input type='text' onChange={handleChange} value={item}/>
           <input type='submit'/>
         </form>
-    <HandleTodo todos={todos} setTodos={setTodos}/>
+    <HandleTodo todos={todos} dispatch ={dispatch}/>
     </>
   )
 }
