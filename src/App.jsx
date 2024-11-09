@@ -20,6 +20,17 @@ function reducer(todos,action){
       });
     case 'delete':
       return   [...todos].filter((todo)=>todo.id !==action.payload.id);
+      case 'edit':
+        return  [...todos].map((todo)=>{
+          if(todo.id===action.payload.id){
+           return {...todo,todo:action.payload.editTodo}
+          }
+          return todo;
+        })
+        //setting the new value
+        setTodos(edit)
+        //resetting the id to null
+        setEdit(null)
   }
 }
 function add(item){

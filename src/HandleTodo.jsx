@@ -58,14 +58,21 @@ export default function HandleTodo({todos,dispatch}){
 
     //saving the edited text to state
     function handleEditSubmit(id){
-        let edit = [...todos].map((todo)=>{
-          if(todo.id===id){
-            todo.todo =editText
+        // let edit = [...todos].map((todo)=>{
+        //   if(todo.id===id){
+        //     todo.todo =editText
+        //   }
+        //   return todo;
+        // })
+        todos.map((todo)=>{
+          if(todo.id ===id){
+            console.log(todo)
+            dispatch({type:'edit',payload:{id:id,editTodo:editText}})
           }
-          return todo;
         })
+  
         //setting the new value
-        setTodos(edit)
+      
         //resetting the id to null
         setEdit(null)
     }
