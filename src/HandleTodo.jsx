@@ -11,18 +11,22 @@ export default function HandleTodo({todos,dispatch}){
   const [editText,setEditText]= useState("")
 
     function handleCheck(id){
-      let getUpdate=[...todos]
-        getUpdate.map((todo)=>{
+      // let getUpdate=[...todos]
+      //   getUpdate.map((todo)=>{
 
-          if(todo.id ===id){
-            todo.completed = !todo.completed
-          }else{
-            todo.completed= todo.completed
-          }
-          return todo
-        });
-
-        setTodos(getUpdate)
+      //     if(todo.id ===id){
+      //       todo.completed = !todo.completed
+      //     }else{
+      //       todo.completed= todo.completed
+      //     }
+      //     return todo
+      //   });
+      todos.map((todo)=>{
+        if(todo.id ===id){
+          dispatch({type:'check',payload:{id:todo.id}})
+        }
+      })
+        // setTodos(getUpdate)
 
     }
 

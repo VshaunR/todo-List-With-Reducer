@@ -7,6 +7,17 @@ function reducer(todos,action){
   switch(action.type){
     case'add':
     return   [...todos,add(action.payload.item)]
+    case 'check':
+      return [...todos].map((todo)=>{
+
+        if(todo.id ===action.payload.id){
+          //had to i guess uplift state of the todo object 
+          //so i made a new object of todo and set completed to !
+          // im only uplifting ONE todos bool at a time
+          return {...todo,completed:!todo.completed}
+        }
+        return todo
+      });
     case 'delete':
       return   [...todos].filter((todo)=>todo.id !==action.payload.id);
   }
