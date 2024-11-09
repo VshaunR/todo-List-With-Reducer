@@ -24,10 +24,14 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
+  padding: 0;
+  display: grid;
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
 }
 
 h1 {
@@ -68,10 +72,56 @@ button:focus-visible {
 }
 #del{
   opacity: 0;
-  color: none;
-  background-color: none;
+  
+ 
   z-index: 0;
 }
 .active{
-  opacity: 1;
+  color: black;
+
+  opacity: 100;
+  z-index: 100;
+}
+.heading{
+ 
+  display: flex;
+  margin:1rem;
+}
+.todo-div{
+  display: flex;
+  flex-grow: 1;
+  justify-content:flex-start;
+  align-items: center;
+  text-align: start;
+  align-items: center;
+  align-content: center;
+  padding: 1rem;
+  margin: 1rem;
+  transition: all ease-in 1s;
+
+}
+.todo-div:hover{
+background-color: #584949;
+  
+}
+p{
+  margin: 1rem;
+  color: black;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: all ease-in 1s;
+
+}
+p:hover{
+  font-size: 1.3rem;
+}
+input{
+  border: none;
+  background-color: #d4d9dd;
+  padding: 1rem;
+  border-radius: 10px;
+}
+.add-form{
+  display: flex;
+  gap:30px;
 }

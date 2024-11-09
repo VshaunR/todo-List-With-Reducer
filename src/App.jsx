@@ -1,12 +1,15 @@
-import { useState,useReducer } from 'react'
-import HandleTodo from './HandleTodo'
-import './App.css'
+import { useState,useReducer } from 'react';
+import HandleTodo from './HandleTodo';
+import './App.css';
+import initialState from './utilities/data.mjs';
+
+
 
 function reducer(todos,action){
 
   switch(action.type){
     case'add':
-    return  todos !==null? ([...todos,add(action.payload.item)]):(<h1>Add</h1>)
+    return  todos !==null? ([...todos,(add(action.payload.item))]):(<h1>Add</h1>)
     case 'check':
       return [...todos].map((todo)=>{
 
@@ -28,9 +31,9 @@ function reducer(todos,action){
           return todo;
         })
         //setting the new value
-        setTodos(edit)
+   
         //resetting the id to null
-        setEdit(null)
+      
         default:
           return todos
 
@@ -47,13 +50,19 @@ function add(item){
 function App() {
   // const [todos,setTodos] = useState([])
   const [item,setItem] = useState("")
-  const [todos,dispatch]= useReducer(reducer,[])
+  const [todos,dispatch]= useReducer(reducer,initialState)
 
   function handleChange(e){
+
    setItem(e.target.value)
   }
   function handleSubmit(e){
     e.preventDefault();
+    //data validation
+      const getItem = document.getElementById('item').value
+      if(getItem ==""){
+        return
+      }
     dispatch({type:'add',payload:{item:item}})
     setItem("")
   }
@@ -61,8 +70,9 @@ function App() {
  
   return (
     <>
-        <form action="" onSubmit={handleSubmit}>
-          <input type='text' onChange={handleChange} value={item} placeholder='Add Something To Do'/>
+      <h1 className='heading'>ToDo List</h1>
+        <form className='add-form' onSubmit={handleSubmit}>
+          <input type='text' onChange={handleChange} id='item' value={item} placeholder='Add Something To Do'/>
           <input type='submit'/>
         </form>
     <HandleTodo todos={todos} dispatch ={dispatch}/>

@@ -1,4 +1,4 @@
-import { useState,useReducer } from "react"
+import { useState,useReducer,useEffect } from "react"
 
 
 
@@ -47,6 +47,7 @@ export default function HandleTodo({todos,dispatch}){
     }
 
     //setting the id of the item we want to edit when clicking the edit button
+    //also to toggle between active edit and save buttons
     function handleEdit(id){
       let edit = [...todos]
 
@@ -87,11 +88,15 @@ export default function HandleTodo({todos,dispatch}){
   
   {todos.map((todo)=>{
     return (
-    <div key={todo.id}>
+   
+      
+    <div key={todo.id} className="todo-div">
         {edit ===todo.id ? (<input type="text"  value={editText} onChange={handleEditText}/>):(  <p>{todo.todo}</p>)}
     
       
-      <button id="del" onClick={()=>handleDelete(todo.id)} style={{opacity:todo.completed?('1'):('.5')}}>Delete</button>
+      <button id="del" onClick={()=>handleDelete(todo.id)} style={{opacity:todo.completed?('1'):('.5')}}>
+        Delete
+        </button>
       <input type="checkbox" value={todo.completed} id="completed" onChange={()=>handleCheck(todo.id)}/>
 
       {edit == todo.id 
@@ -101,6 +106,7 @@ export default function HandleTodo({todos,dispatch}){
     
     
     </div>
+
     )
   })}
 
