@@ -2,7 +2,7 @@ import { useState } from "react"
 
 export default function HandleTodo({todos,setTodos}){
 
-  const [check,setCheck]= useState(false)
+  
     function handleCheck(id){
       let getUpdate=[...todos]
         getUpdate.map((todo)=>{
@@ -19,21 +19,27 @@ export default function HandleTodo({todos,setTodos}){
 
     }
 
+    function handleDelete(id){
+     
+          const del = [...todos].filter((todo)=>todo.id !==id);
+          setTodos(del)
+    }
 
-  let list = todos.map((todo)=>{
-    return (
-    <div>
-      <p>{todo.todo}</p>
-      <input type="checkbox" value={todo.completed} id="completed" onChange={()=>handleCheck(todo.id)}/>
-      <button>Edit</button>
-      <button>Delete</button>
-    </div>
-    )
-  })
+
 
   return(<>
   
-    <div> {list}</div>
+  {todos.map((todo)=>{
+    return (
+    <div key={todo.id}>
+      <p>{todo.todo}</p>
+      <button onClick={()=>handleDelete(todo.id)}>Delete</button>
+      <input type="checkbox" value={todo.completed} id="completed" onChange={()=>handleCheck(todo.id)}/>
+      <button>Edit</button>
+    
+    </div>
+    )
+  })}
 
 
 
