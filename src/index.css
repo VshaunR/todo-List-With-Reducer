@@ -67,7 +67,9 @@ button:focus-visible {
   }
 }
 #del{
-  opacity: .5;
+  opacity: 0;
+  color: none;
+  background-color: none;
   z-index: 0;
 }
 .active{

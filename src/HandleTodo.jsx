@@ -70,6 +70,7 @@ export default function HandleTodo({todos,dispatch}){
         //   }
         //   return todo;
         // })
+        
         todos.map((todo)=>{
           if(todo.id ===id){
             console.log(todo)
@@ -87,7 +88,7 @@ export default function HandleTodo({todos,dispatch}){
   {todos.map((todo)=>{
     return (
     <div key={todo.id}>
-        {edit ===todo.id ? (<input type="text"  value={todo.todo} onChange={handleEditText}/>):(  <p>{todo.todo}</p>)}
+        {edit ===todo.id ? (<input type="text"  value={editText} onChange={handleEditText}/>):(  <p>{todo.todo}</p>)}
     
       
       <button id="del" onClick={()=>handleDelete(todo.id)} style={{opacity:todo.completed?('1'):('.5')}}>Delete</button>
